@@ -1,0 +1,17 @@
+Cut-out asset sheet for a website hero, 1536x1024 landscape, transparent background.
+
+SUBJECT: seven separate, realistic photographic clouds, each one a fully isolated object with clear empty space around it. The clouds must NOT touch or overlap each other, and none may touch the edges of the canvas: keep at least 40 px of empty transparent space between any two clouds and between every cloud and the canvas border.
+
+LAYOUT (three rows, well spaced):
+- Row 1 (top): one long, low, flat cloud bank (stratocumulus), very wide (about 60% of the canvas width) and short, with a soft flat base and a lumpy, billowing top; next to it, on the right, one small puffy cumulus.
+- Row 2 (middle): one big, tall, puffy cumulus with rounded billowing towers; one medium rounded cumulus; one small thin wispy cloud stretched horizontally.
+- Row 3 (bottom): one second long, flat, wide cloud bank, different in shape from the first, about 70% of the canvas width; next to it, one small soft cloud fragment.
+Every cloud has a different size and silhouette.
+
+LIGHT AND COLOR (the same for all seven): warm morning sun from the right and slightly above, at about 10:40 a.m. Sunlit tops and right sides glow warm cream and soft peach (#FFF4E3, #F6D7B4), shadowed undersides and left sides in soft lavender-gray and dusty blue (#B9B4C4, #8E9BB5). Volumetric, soft, real photographic clouds as seen from an airplane, not cartoon, not illustration.
+
+EDGES: soft, feathered, semi-transparent wispy edges with a smooth gradual alpha falloff, like real vapor dissolving into the air. The dense core of each cloud is fully opaque. No hard outline, no white halo, no sticker look.
+
+BACKGROUND: completely transparent background (PNG with a real alpha channel). No sky, no blue, no gradient, no ground. If transparency is truly impossible, use a perfectly flat pure black #000000 backdrop with no gradient.
+
+No text, no logos, no watermark.

@@ -1,0 +1,165 @@
+/* Bloco curto de fechamento: a linha de dados do sistema e o botão. */
+.fecho {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: clamp(36px, 5vw, 64px);
+  padding: clamp(40px, 7vw, 96px) var(--margem) 28px;
+  background: var(--cor-papel-2);
+  color: var(--cor-tinta);
+}
+
+.fecho__rotulo {
+  font-family: var(--mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.02em;
+  color: var(--cor-tinta-2);
+}
+
+.fecho__titulo {
+  margin-top: calc(-1 * clamp(18px, 3vw, 40px));
+  font-size: var(--t-titulo);
+  font-weight: 520;
+  font-variation-settings: 'wdth' 104;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+/* linha de dados: seis valores separados por fios */
+.fecho__dados {
+  display: grid;
+  /* qualquer número de dados: no computador eles dividem a largura em partes iguais */
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  border-top: 1px solid color-mix(in srgb, var(--cor-tinta) 18%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--cor-tinta) 18%, transparent);
+}
+
+.dado {
+  display: grid;
+  gap: 10px;
+  padding: 20px 18px 22px;
+  border-left: 1px solid color-mix(in srgb, var(--cor-tinta) 18%, transparent);
+}
+
+.dado:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.dado dt {
+  font-family: var(--mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.02em;
+  color: var(--cor-tinta-2);
+}
+
+.dado dd {
+  font-size: clamp(1.05rem, 1.45vw, 1.45rem);
+  font-weight: 480;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+
+.fecho__acao {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.fecho__nota {
+  max-width: 34ch;
+  font-size: 0.95rem;
+  color: var(--cor-tinta-2);
+}
+
+.fecho__pe {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-top: 22px;
+  border-top: 1px solid color-mix(in srgb, var(--cor-tinta) 18%, transparent);
+  font-family: var(--mono);
+  font-size: var(--t-micro);
+  color: var(--cor-tinta-2);
+}
+
+.fecho__marca {
+  font-family: var(--grotesca);
+  font-size: 1.05rem;
+  font-weight: 560;
+  letter-spacing: -0.04em;
+  color: var(--cor-tinta);
+}
+
+.fecho__sol {
+  display: inline-block;
+  width: 0.42em;
+  height: 0.42em;
+  margin-left: 0.06em;
+  vertical-align: 0.45em;
+}
+
+.fecho__sol svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+@media (max-width: 1100px) {
+  .fecho__dados {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .dado:nth-child(3n + 1) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .dado:nth-child(n + 4) {
+    border-top: 1px solid color-mix(in srgb, var(--cor-tinta) 18%, transparent);
+  }
+}
+
+@media (max-width: 760px) {
+  .fecho {
+    gap: 32px;
+    padding-top: 36px;
+  }
+
+  .fecho__dados {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dado,
+  .dado:nth-child(3n + 1) {
+    padding: 16px 0 18px 16px;
+    border-left: 1px solid color-mix(in srgb, var(--cor-tinta) 18%, transparent);
+  }
+
+  .dado:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .dado:nth-child(n + 3) {
+    border-top: 1px solid color-mix(in srgb, var(--cor-tinta) 18%, transparent);
+  }
+
+  .dado dd {
+    font-size: 1.05rem;
+    white-space: normal;
+  }
+
+  .fecho__acao {
+    gap: 16px;
+  }
+
+  .fecho__pe {
+    flex-direction: column;
+    gap: 6px;
+  }
+}

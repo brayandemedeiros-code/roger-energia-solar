@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Zênite · Energia solar em Goiânia</title>
+    <meta name="description" content="10 painéis pagam a conta de luz de uma casa em Goiânia. Projeto, instalação e homologação em 45 dias." />
+    <meta name="theme-color" content="#2b66a3" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- primeira pintura: nunca a página crua. O tema (?tema=) e a cor da primeira tela ligam aqui, antes de qualquer
+         arquivo; a folha do site vem em <link> (segura a pintura até chegar), nunca pelo JS. Ao trocar a paleta em
+         tokens.css, troque aqui as duas cores do tema padrão (a --cor-nevoa e a --cor-ceu-1). -->
+    <script>
+      (function () {
+        var d = document.documentElement;
+        // [cor da primeira tela (a --cor-nevoa), cor do navegador no celular (a --cor-ceu-1)]
+        var temas = { zenite: ['#f3e3c8', '#2b66a3'], entardecer: ['#f6d9bf', '#3a3a78'], mata: ['#f1e5c9', '#2b66a3'] };
+        var t = new URLSearchParams(location.search).get('tema');
+        if (!temas[t]) t = 'zenite';
+        if (t !== 'zenite') d.dataset.tema = t;
+        d.style.backgroundColor = temas[t][0];
+        document.querySelector('meta[name="theme-color"]').content = temas[t][1];
+        d.classList.add('js');
+      })();
+    </script>
+    <style>
+      body { margin: 0; }
+      /* a cena nasce só com a névoa: o main.js arma a entrada (as peças escondidas, as nuvens no lugar) e solta a trava */
+      html.js:not(.armada) .palco > *, html.js:not(.armada) .nav { visibility: hidden; }
+    </style>
+    <link rel="stylesheet" href="/src/styles/site.css" />
+    <link rel="preload" as="image" href="/img/ilha.webp" fetchpriority="high" />
+  </head>
+  <body>
+    <!-- @secao nav -->
+    <!-- @secao hero -->
+    <main>
+      <!-- @secao fecho -->
+    </main>
+    <div class="grao" aria-hidden="true"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

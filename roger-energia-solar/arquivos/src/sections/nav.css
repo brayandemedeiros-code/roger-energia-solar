@@ -1,0 +1,89 @@
+.nav {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  z-index: 40;
+  transform: translateX(-50%);
+  transition:
+    transform 0.6s var(--suave),
+    opacity 0.4s ease;
+}
+
+/* some ao descer, volta ao subir (motion/nav.js) */
+.nav--oculta {
+  transform: translate(-50%, calc(-100% - 24px));
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav {
+    transition: opacity 0.2s linear;
+  }
+}
+
+.nav__in {
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 3.3vw, 52px);
+  height: 46px;
+  padding: 0 clamp(28px, 3.4vw, 54px);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--cor-tinta) 42%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cor-papel) 6%, transparent);
+  transition: background-color 0.5s var(--suave);
+}
+
+/* sobre o creme do fechamento a barra fica tinta cheia */
+.nav--fecho .nav__in {
+  background: color-mix(in srgb, var(--cor-tinta) 92%, transparent);
+}
+
+.nav__link {
+  position: relative;
+  /* alvo de toque de 44 px sem mexer no desenho: o enchimento cresce a área do link e a margem negativa devolve o espaço */
+  padding: 14px 8px;
+  margin: -14px -8px;
+  font-size: var(--t-nav);
+  font-weight: 420;
+  letter-spacing: -0.005em;
+  color: var(--cor-papel);
+  white-space: nowrap;
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 9px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s var(--suave);
+}
+
+@media (hover: hover) {
+  .nav__link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@media (max-width: 760px) {
+  .nav {
+    top: 10px;
+    width: calc(100% - 2 * var(--margem));
+  }
+
+  .nav__in {
+    justify-content: space-between;
+    gap: 0;
+    height: 42px;
+    padding: 0 18px;
+    border-radius: 14px;
+  }
+}
