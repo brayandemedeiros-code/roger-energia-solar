@@ -1,0 +1,9 @@
+/* Folha única do site, ligada no <head> do index.html (segura a primeira pintura até chegar). Importada pelo JS, no
+   dev do Vite ela só entraria depois dos módulos e a página apareceria crua por um instante.
+   Ordem: as fontes, os tokens, a base e uma folha por seção, na ordem da página. */
+@import './fonts.css';
+@import './tokens.css';
+@import './base.css';
+@import '../sections/nav.css';
+@import '../sections/hero.css';
+@import '../sections/fecho.css';

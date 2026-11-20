@@ -1,0 +1,5 @@
+/* Fontes livres (OFL, uso comercial liberado), pelo Fontsource. Os @import vêm antes de qualquer outra regra: depois
+   de um @font-face o navegador ignora todos.
+   Archivo variável com o eixo de largura (o nome, os textos, os títulos); IBM Plex Mono 400 (HUD, rótulos, rodapé). */
+@import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource/ibm-plex-mono/400.css';

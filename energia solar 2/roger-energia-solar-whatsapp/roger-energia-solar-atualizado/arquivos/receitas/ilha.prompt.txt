@@ -1,0 +1,20 @@
+Cut-out asset for a website hero, 1536x1024 landscape, transparent background.
+
+REFERENCE (optional): attach the demo island (public/img/ilha.webp) to keep the same angle, size and light, and/or a photo of the real house or building to recreate. Recreate ONLY the floating island diorama, as an isolated object: no sky, no clouds, no text, no interface, no haze.
+
+SUBJECT: a tilt-shift photograph of a handmade miniature diorama, a small floating island. A chunk of red cerrado earth (#A4482B) shaped like an upside-down cone, with a ragged rocky underside, long thin roots hanging down, small rocks and clumps of earth dangling at the bottom tip. On top:
+- a simple one-story Brazilian house, white plastered walls with slightly worn texture, a blue front door and blue wooden shutters, a small porch with potted plants and a wooden chair;
+- a clay tile roof (terracotta) carrying exactly 10 dark blue-black solar panels in two neat rows of five, with one bright glint of sun on the right panels;
+- a blue plastic water tank (caixa d'agua) on a small wooden tower to the right of the roof;
+- a big mango tree with dark green leaves and a few mangoes on the left, its canopy rising above the roof;
+- a clothesline with colorful clothes (blue, pink, red, yellow, white) on the right;
+- a small red motorcycle parked by a low wooden gate and fence on the left;
+- a caramel dog sleeping in the packed red-dirt yard in front of the house;
+- grass tufts, shrubs and small flowers along the edge of the island, some vines hanging over the edge.
+Morning sun from the right at about 10:40 a.m., crisp short shadows falling to the left, warm golden highlight on the right side of the earth, cool blue bounce light from the sky on the left and underside. Ultra sharp, high detail, realistic miniature photography.
+
+COMPOSITION: the whole island is visible and large, centered, filling about 92% of the canvas width, with a small empty margin on every side. Nothing cropped: the top of the mango tree, the water tank and the lowest dangling rocks and roots must all be inside the canvas. Isometric three-quarter view from slightly above.
+
+BACKGROUND: completely transparent background (PNG with a real alpha channel). Clean, precise cut-out edges around leaves, roots and rocks, no white halo, no fringe, no drop shadow, no floor, no clouds, no mist. If transparency is truly impossible, use a perfectly flat pure magenta #FF00FF backdrop with no shadow and no gradient.
+
+No text, no logos, no watermark.

@@ -1,0 +1,105 @@
+/* Cores em papéis, nunca pelo nome: trocar a paleta é mudar este arquivo (e as duas cores do tema padrão no script do
+   <head> do index.html). A paleta padrão é a "zenite", o céu da manhã de Goiânia; ?tema=entardecer e ?tema=mata
+   mostram outras duas.
+   Contraste: o texto do hero é --cor-papel sobre o céu e as nuvens (a sombra de nuvem e a sombra no texto seguram a
+   leitura); o fechamento é --cor-tinta sobre --cor-papel-2. A barra da nav e o círculo da seta são --cor-tinta: ela
+   precisa ser escura. A ilha e as nuvens são imagens com a luz da manhã: um céu muito diferente (noite, verde) brigaria
+   com elas. */
+:root {
+  /* o céu, de cima para o horizonte */
+  --cor-ceu-1: #2b66a3;
+  --cor-ceu-2: #3a78b4;
+  --cor-ceu-3: #6f9ec9;
+  --cor-ceu-4: #b7c8d6;
+  --cor-ceu-5: #ead9c2;
+  --cor-nevoa: #f3e3c8; /* pé do céu, fundo da primeira tela, névoa da entrada */
+  --cor-sol: #ffe8c4; /* brilho do sol no canto de cima e clarão do horizonte */
+
+  /* a marca */
+  --cor-papel: #faf6ee; /* nome, texto e botão do hero */
+  --cor-papel-2: #f1e7d6; /* fechamento, véu e muro da saída */
+  --cor-tinta: #14233a; /* barra da nav, círculo da seta, texto do fechamento, sombras de texto */
+  --cor-tinta-2: #3b4a60; /* rótulos e notas do fechamento */
+
+  /* tons da cena: saem dos papéis acima, então acompanham qualquer paleta */
+  --cor-serra: color-mix(in srgb, var(--cor-ceu-3) 55%, var(--cor-ceu-4)); /* a serra apagada no horizonte */
+  --cor-clarao: color-mix(in srgb, var(--cor-sol) 55%, var(--cor-ceu-5)); /* clarão quente perto do horizonte */
+  --cor-bruma: color-mix(in srgb, var(--cor-nevoa) 70%, var(--cor-ceu-5)); /* névoa das nuvens e da base da ilha */
+  --cor-bruma-funda: color-mix(in srgb, var(--cor-ceu-5) 80%, var(--cor-ceu-4)); /* fundo da névoa do horizonte */
+  --cor-bruma-frente: color-mix(in srgb, var(--cor-ceu-5) 70%, var(--cor-ceu-4)); /* névoa das nuvens da frente */
+  --cor-bruma-pe: color-mix(in srgb, var(--cor-ceu-5) 85%, var(--cor-ceu-4)); /* pé da névoa da frente */
+  --cor-nevoa-quente: color-mix(in srgb, var(--cor-nevoa) 50%, var(--cor-papel)); /* halo embaixo da ilha */
+  --cor-ceu-sombra: color-mix(in srgb, var(--cor-ceu-2) 60%, var(--cor-ceu-3)); /* o lado da sombra da ilha */
+  --cor-sombra: var(--cor-tinta); /* sombra de nuvem atrás do texto */
+  --cor-halo: var(--cor-tinta); /* halo bem leve em volta do nome */
+
+  /* tipografia */
+  --grotesca: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --t-marca: min(17.6vw, 31svh);
+  --t-titulo: clamp(2rem, 4.4vw, 4.6rem);
+  --t-texto: clamp(1rem, 1.38vw, 1.4rem);
+  --t-nav: 0.9rem;
+  --t-hud: 0.78rem;
+  --t-micro: 0.72rem;
+
+  /* sombra do texto do hero (sempre da tinta) */
+  --sombra-texto: 0 1px 2px color-mix(in srgb, var(--cor-tinta) 32%, transparent),
+    0 2px 18px color-mix(in srgb, var(--cor-tinta) 55%, transparent);
+
+  /* grade */
+  --margem: clamp(16px, 2.3vw, 40px);
+
+  /* movimento */
+  --suave: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Ajuste fino da paleta padrão: os tons da cena com o valor exato do desenho original. Ao trocar as cores do :root
+   por outra paleta, apague este bloco: os tons passam a sair das fórmulas acima. */
+:root:not([data-tema]) {
+  --cor-serra: #9cb0c9;
+  --cor-clarao: #fae6cc;
+  --cor-bruma: #f0dec8;
+  --cor-bruma-funda: #e8d6c4;
+  --cor-bruma-frente: #e2d2ca;
+  --cor-bruma-pe: #e8d8c8;
+  --cor-nevoa-quente: #f8ead6;
+  --cor-ceu-sombra: #5680ba;
+  --cor-sombra: #16243c;
+  --cor-halo: #463c46;
+}
+
+/* fim de tarde: o mesmo desenho com o céu do entardecer */
+:root[data-tema='entardecer'] {
+  --cor-ceu-1: #3a3a78;
+  --cor-ceu-2: #5b4a8c;
+  --cor-ceu-3: #a46a8e;
+  --cor-ceu-4: #dc9a86;
+  --cor-ceu-5: #f0c7a2;
+  --cor-nevoa: #f6d9bf;
+  --cor-sol: #ffd7a8;
+  --cor-papel: #fff6ec;
+  --cor-papel-2: #f4e2d0;
+  --cor-tinta: #2a1f3d;
+  --cor-tinta-2: #5b4a68;
+}
+
+/* a marca em verde: o céu fica, a tinta (nav, botões, fechamento) e o papel mudam */
+:root[data-tema='mata'] {
+  --cor-nevoa: #f1e5c9;
+  --cor-papel: #fbf8ef;
+  --cor-papel-2: #ece6d2;
+  --cor-tinta: #173a2c;
+  --cor-tinta-2: #48604f;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --t-marca: 29vw;
+    --t-texto: 1.02rem;
+    --t-hud: 0.75rem; /* 12 px: o mínimo de leitura no celular */
+    --t-micro: 0.75rem;
+    --t-nav: 0.8rem;
+  }
+}

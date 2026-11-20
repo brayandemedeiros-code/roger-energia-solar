@@ -1,0 +1,489 @@
+/* Hero: palco preso enquanto as camadas se separam na saída. */
+.hero {
+  position: relative;
+  height: 200svh;
+}
+
+.palco {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--cor-nevoa);
+}
+
+.camada,
+.camada__in {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.camada {
+  will-change: transform;
+}
+
+/* ---------- céu ---------- */
+.ceu {
+  position: absolute;
+  inset: -12% -6%;
+  background:
+    radial-gradient(38% 46% at 92% 4%, color-mix(in srgb, var(--cor-sol) 60%, transparent), transparent 70%),
+    radial-gradient(70% 40% at 50% 74%, color-mix(in srgb, var(--cor-clarao) 55%, transparent), transparent 75%),
+    linear-gradient(
+      180deg,
+      var(--cor-ceu-1) 0%,
+      var(--cor-ceu-2) 20%,
+      var(--cor-ceu-3) 42%,
+      var(--cor-ceu-4) 58%,
+      var(--cor-ceu-5) 72%,
+      var(--cor-nevoa) 88%
+    );
+}
+
+.serra {
+  position: absolute;
+  left: -6%;
+  width: 112%;
+  top: 55%;
+  height: 9%;
+  fill: var(--cor-serra);
+  opacity: 0.42;
+  filter: blur(1.5px);
+  /* o polígono tem base reta: desfaz para baixo, senão ela aparece através da névoa na saída */
+  -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 92%);
+  mask-image: linear-gradient(180deg, #000 30%, transparent 92%);
+}
+
+/* ---------- nuvens ---------- */
+/* as nuvens chegam no HTML como <img> soltos; o nuvens.js embrulha cada uma num .nuvem e posiciona */
+.nuvens > img {
+  display: none;
+}
+
+.nuvem {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+  transform: translate3d(var(--x, 0px), 0, 0);
+  animation: deriva var(--dur, 120s) linear var(--atraso, 0s) infinite;
+}
+
+.nuvem img {
+  width: 100%;
+  height: 100%;
+}
+
+.nuvem--flip img {
+  transform: scaleX(-1);
+}
+
+@keyframes deriva {
+  from {
+    transform: translate3d(var(--de), 0, 0);
+  }
+  to {
+    transform: translate3d(var(--ate), 0, 0);
+  }
+}
+
+/* nuvens de longe: menos contraste, puxadas para o azul do céu */
+.camada--fundo .nuvem img {
+  filter: blur(var(--blur, 0px)) saturate(0.78) brightness(1.03) contrast(0.86);
+}
+
+.camada--muro .nuvem img {
+  filter: blur(var(--blur, 0px)) brightness(1.07) saturate(0.85);
+}
+
+.camada--horizonte .nuvem img {
+  filter: blur(var(--blur, 0px)) saturate(0.9) contrast(0.92);
+}
+
+/* faixa de névoa que fecha o mar de nuvens: nunca aparece céu azul embaixo */
+.neblina {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+}
+
+.neblina--horizonte {
+  top: 64%;
+  bottom: -200%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--cor-bruma) 70%, transparent) 22%,
+    color-mix(in srgb, var(--cor-bruma-funda) 95%, transparent) 60%
+  );
+}
+
+.neblina--frente {
+  top: 80%;
+  bottom: -300%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--cor-bruma-frente) 55%, transparent) 22%,
+    color-mix(in srgb, var(--cor-bruma-pe) 85%, transparent) 45%
+  );
+}
+
+.neblina--muro {
+  top: 74%;
+  bottom: -200%;
+  background: linear-gradient(180deg, transparent 0%, var(--cor-papel-2) 16%);
+}
+
+/* ---------- ilha ---------- */
+.ilha {
+  --ilha-w: min(62vw, 96svh);
+  position: absolute;
+  left: 51.5%;
+  top: 40.5%;
+  width: var(--ilha-w);
+  aspect-ratio: 1446 / 994;
+  transform: translate(-50%, -50%);
+}
+
+.ilha__flutua {
+  position: absolute;
+  inset: 0;
+  animation: flutua 7.5s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes flutua {
+  from {
+    transform: translate3d(0, -0.75%, 0) rotate(-0.3deg);
+  }
+  to {
+    transform: translate3d(0, 0.85%, 0) rotate(0.25deg);
+  }
+}
+
+.ilha__img {
+  width: 100%;
+  height: 100%;
+  filter: saturate(0.88) contrast(0.96) brightness(1.01);
+}
+
+/* perspectiva aérea: a base da ilha pega a névoa quente, o lado da sombra pega o azul do céu */
+.ilha__ar {
+  position: absolute;
+  inset: 0;
+  /* a máscara é a própria ilha: o JS (motion/ilha.js) passa a imagem do <img> em --ilha-mascara */
+  -webkit-mask: var(--ilha-mascara, url(/img/ilha.webp)) center / 100% 100% no-repeat;
+  mask: var(--ilha-mascara, url(/img/ilha.webp)) center / 100% 100% no-repeat;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--cor-ceu-sombra) 16%, transparent) 0%, transparent 38%),
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 52%,
+      color-mix(in srgb, var(--cor-bruma) 16%, transparent) 76%,
+      color-mix(in srgb, var(--cor-bruma) 36%, transparent) 100%
+    );
+}
+
+.ilha__nevoa {
+  position: absolute;
+  left: 8%;
+  right: 6%;
+  top: 62%;
+  bottom: -14%;
+  background: radial-gradient(50% 50% at 50% 55%, color-mix(in srgb, var(--cor-nevoa-quente) 50%, transparent), transparent 100%);
+  filter: blur(10px);
+}
+
+/* ---------- legibilidade e saída ---------- */
+/* sombra de nuvem atrás do texto: parada e do tamanho do palco (nunca mostra borda);
+   a caixa de fora entra com as nuvens da frente, a de dentro some na saída */
+.sombra-in,
+.sombra {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sombra {
+  background:
+    radial-gradient(30% 30% at 84% 81%, color-mix(in srgb, var(--cor-sombra) 42%, transparent), transparent 100%),
+    radial-gradient(48% 36% at 30% 86%, color-mix(in srgb, var(--cor-sombra) 20%, transparent), transparent 100%),
+    linear-gradient(0deg, color-mix(in srgb, var(--cor-sombra) 30%, transparent) 0%, color-mix(in srgb, var(--cor-sombra) 12%, transparent) 22%, transparent 42%);
+}
+
+.veu {
+  position: absolute;
+  inset: 0;
+  background: var(--cor-papel-2);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.camada--muro {
+  transform: translate3d(0, 120%, 0);
+}
+
+/* ---------- texto ---------- */
+.texto {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  align-content: end;
+  gap: 32px;
+  padding: 0 var(--margem) 7.4svh;
+  will-change: transform, opacity;
+}
+
+.marca {
+  min-width: 0; /* a coluna do nome pode ficar mais estreita que ele: o JS (cabeNome) diminui o nome até caber */
+  margin-left: -0.04em;
+  margin-bottom: -0.12em;
+  font-size: var(--t-marca);
+  font-weight: 560;
+  font-variation-settings: 'wdth' 106;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  color: var(--cor-papel);
+  text-shadow: 0 0 0.35em color-mix(in srgb, var(--cor-halo) 14%, transparent);
+}
+
+.marca__linha {
+  display: block;
+  overflow: hidden;
+  padding: 0.06em 0.06em 0.04em 0.04em;
+  white-space: nowrap;
+}
+
+.marca__letra {
+  display: inline-block;
+}
+
+.marca__sol {
+  display: inline-block;
+  width: 0.29em;
+  height: 0.29em;
+  margin-left: 0.04em;
+  vertical-align: 0.43em;
+}
+
+.marca__sol svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+  animation: gira 48s linear infinite;
+}
+
+@keyframes gira {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.chamada {
+  display: grid;
+  justify-items: start;
+  gap: 22px;
+  width: min(28vw, 440px);
+  pointer-events: auto;
+}
+
+.chamada__texto {
+  font-size: var(--t-texto);
+  font-weight: 460;
+  line-height: 1.24;
+  letter-spacing: -0.018em;
+  color: var(--cor-papel);
+  text-shadow: var(--sombra-texto);
+}
+
+.linha {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.linha > span {
+  display: block;
+  white-space: nowrap;
+}
+
+.chamada__botao {
+  box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--cor-tinta) 45%, transparent);
+}
+
+.dica {
+  position: absolute;
+  left: 50%;
+  bottom: 2.6svh;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.02em;
+  color: var(--cor-papel);
+  text-shadow: 0 1px 8px color-mix(in srgb, var(--cor-tinta) 50%, transparent);
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+/* ---------- HUD ---------- */
+.hud {
+  position: absolute;
+  top: 30px;
+  font-family: var(--mono);
+  font-size: var(--t-hud);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: var(--cor-papel);
+  text-shadow: 0 1px 8px color-mix(in srgb, var(--cor-tinta) 35%, transparent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.hud--esq {
+  left: var(--margem);
+}
+
+.hud--dir {
+  right: var(--margem);
+}
+
+/* ---------- celular ---------- */
+@media (max-width: 760px) {
+  .hero {
+    height: 185svh;
+  }
+
+  .ilha {
+    --ilha-w: 98vw;
+    left: 50%;
+    top: 32%;
+  }
+
+  .serra {
+    top: 50%;
+    height: 6%;
+  }
+
+  .texto {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 var(--margem) max(22px, env(safe-area-inset-bottom));
+  }
+
+  .marca {
+    margin-bottom: -0.1em;
+  }
+
+  .chamada {
+    width: 100%;
+    gap: 18px;
+  }
+
+  .botao {
+    height: 50px;
+  }
+
+  .dica {
+    display: none;
+  }
+
+  .hud {
+    top: 64px;
+    line-height: 1.55;
+  }
+
+  .sombra {
+    background:
+      linear-gradient(0deg, color-mix(in srgb, var(--cor-sombra) 50%, transparent) 0%, color-mix(in srgb, var(--cor-sombra) 30%, transparent) 22%, transparent 46%);
+  }
+
+  .neblina--horizonte {
+    top: 58%;
+  }
+}
+
+/* ---------- movimento reduzido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    height: auto;
+  }
+
+  .palco {
+    position: relative;
+  }
+
+  .nuvem {
+    animation: none;
+  }
+
+  .ilha__flutua,
+  .marca__sol svg {
+    animation: none;
+  }
+}
+
+/* hero fora da tela: deriva, flutuação e sol param */
+.palco--parado .nuvem,
+.palco--parado .ilha__flutua,
+.palco--parado .marca__sol svg {
+  animation-play-state: paused;
+}
+
+.camada--ilha {
+  transform-origin: 51.5% 40%;
+}
+
+.camada--frente {
+  transform-origin: 50% 85%;
+}
+
+/* a primeira seção depois do hero (na demo, o fechamento) sobe 45svh por cima do fim dele e a borda de cima desfaz na
+   névoa: o conteúdo sai de dentro da nuvem, sem uma tela inteira de creme vazio antes. Ela precisa ter o fundo
+   --cor-papel-2, a cor do véu da saída. */
+.hero + main > :first-child {
+  position: relative;
+  z-index: 2;
+  margin-top: -45svh;
+}
+
+.hero + main > :first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 45svh;
+  background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--cor-papel-2) 75%, transparent) 55%, var(--cor-papel-2) 100%);
+  pointer-events: none;
+}
+
+/* movimento reduzido: o hero não fica preso nem sai; a base desfaz no creme do fechamento pelo véu, que fica atrás do
+   texto (antes, a faixa vinha por cima e apagava o botão no celular) */
+@media (prefers-reduced-motion: reduce) {
+  .hero + main > :first-child {
+    margin-top: 0;
+  }
+
+  .hero + main > :first-child::before {
+    display: none;
+  }
+
+  .veu {
+    top: auto;
+    height: 14%;
+    opacity: 1;
+    background: linear-gradient(180deg, transparent, var(--cor-papel-2));
+  }
+
+  .dica {
+    color: var(--cor-tinta-2);
+    text-shadow: none;
+  }
+}

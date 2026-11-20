@@ -1,0 +1,133 @@
+<!-- Hero: um palco preso enquanto a página rola mais uma tela; as camadas se separam na saída.
+     Cada .camada diz no HTML a profundidade no cursor (data-prof), quanto sobe na saída (data-saida, em alturas da
+     tela) e quanto cresce ou encolhe (data-escala). As nuvens são <img> com a posição nos atributos (motion/nuvens.js):
+       data-tela       computador ou celular (até 760 px): cada tela tem a sua composição
+       data-x          borda esquerda no começo, em fração da largura (a nuvem deriva para a direita e volta pela esquerda)
+       data-y          centro vertical, em fração da altura
+       data-largura    largura em unidades (computador: 1 unidade = min(largura, 1,9 × altura) / 100;
+                       celular: max(largura, 0,62 × altura) / 100)
+       data-espelhada  espelhada na horizontal        data-opacidade  de 0 a 1
+     width e height são o tamanho natural do arquivo. data-vel (unidades por segundo) e data-blur ficam na camada. -->
+<header class="hero" id="topo">
+  <div class="palco">
+    <div class="camada camada--ceu" data-camada="ceu" data-prof="0.05" data-saida="0.06">
+      <div class="camada__in">
+        <div class="ceu"></div>
+        <!-- serra distante no horizonte, bem apagada pela névoa -->
+        <svg class="serra" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 100 L0 74 C60 70 110 58 170 62 C230 66 260 52 320 50 C380 48 420 64 480 66 C540 68 580 54 640 44 C690 36 730 42 780 50 C830 58 870 40 920 36 C955 33 980 40 1000 44 L1000 100 Z" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- nuvens de longe: pequenas, frias e um pouco desfocadas -->
+    <div class="camada camada--fundo" data-camada="fundo" data-prof="0.18" data-saida="0.16">
+      <div class="camada__in nuvens" data-nuvens="fundo" data-vel="0.32" data-blur="0.8">
+        <img src="/img/nuvem-2.webp" width="350" height="211" alt="" data-tela="computador" data-x="0.03" data-y="0.36" data-largura="11" data-espelhada data-opacidade="0.8" />
+        <img src="/img/nuvem-7.webp" width="279" height="210" alt="" data-tela="computador" data-x="0.77" data-y="0.22" data-largura="9" data-opacidade="0.75" />
+        <img src="/img/nuvem-4.webp" width="434" height="255" alt="" data-tela="computador" data-x="0.89" data-y="0.4" data-largura="12" data-opacidade="0.8" />
+        <img src="/img/nuvem-1.webp" width="1110" height="240" alt="" data-tela="computador" data-x="0.6" data-y="0.33" data-largura="18" data-opacidade="0.55" />
+        <img src="/img/nuvem-7.webp" width="279" height="210" alt="" data-tela="computador" data-x="0.16" data-y="0.19" data-largura="6" data-espelhada data-opacidade="0.5" />
+        <img src="/img/nuvem-2.webp" width="350" height="211" alt="" data-tela="celular" data-x="-0.12" data-y="0.22" data-largura="34" data-espelhada data-opacidade="0.85" />
+        <img src="/img/nuvem-7.webp" width="279" height="210" alt="" data-tela="celular" data-x="0.66" data-y="0.17" data-largura="22" data-opacidade="0.7" />
+        <img src="/img/nuvem-4.webp" width="434" height="255" alt="" data-tela="celular" data-x="0.78" data-y="0.44" data-largura="26" data-opacidade="0.8" />
+      </div>
+    </div>
+
+    <!-- mar de nuvens do horizonte, com a faixa de névoa por baixo (nunca aparece céu azul no pé da tela) -->
+    <div class="camada camada--horizonte" data-camada="horizonte" data-prof="0.34" data-saida="0.32">
+      <div class="camada__in nuvens" data-nuvens="horizonte" data-vel="0.55" data-blur="0.3">
+        <div class="neblina neblina--horizonte"></div>
+        <img src="/img/nuvem-3.webp" width="705" height="369" alt="" data-tela="computador" data-x="-0.05" data-y="0.53" data-largura="33" />
+        <img src="/img/nuvem-6.webp" width="1208" height="246" alt="" data-tela="computador" data-x="0.16" data-y="0.67" data-largura="74" />
+        <img src="/img/nuvem-1.webp" width="1110" height="240" alt="" data-tela="computador" data-x="0.6" data-y="0.61" data-largura="52" data-espelhada />
+        <img src="/img/nuvem-4.webp" width="434" height="255" alt="" data-tela="computador" data-x="0.86" data-y="0.53" data-largura="19" data-espelhada />
+        <img src="/img/nuvem-3.webp" width="705" height="369" alt="" data-tela="celular" data-x="-0.36" data-y="0.47" data-largura="78" />
+        <img src="/img/nuvem-6.webp" width="1208" height="246" alt="" data-tela="celular" data-x="0.04" data-y="0.56" data-largura="150" />
+        <img src="/img/nuvem-1.webp" width="1110" height="240" alt="" data-tela="celular" data-x="0.52" data-y="0.5" data-largura="110" data-espelhada />
+      </div>
+    </div>
+
+    <div class="camada camada--ilha" data-camada="ilha" data-prof="0.58" data-saida="0.6" data-escala="-0.14">
+      <div class="camada__in">
+        <div class="ilha">
+          <div class="ilha__flutua">
+            <img class="ilha__img" src="/img/ilha.webp" alt="Casa em miniatura com painéis solares sobre uma ilha flutuante entre nuvens" width="1446" height="994" fetchpriority="high" decoding="async" />
+            <div class="ilha__ar" aria-hidden="true"></div>
+          </div>
+          <div class="ilha__nevoa" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- nuvens da frente: passam sobre a base da ilha e atrás do nome -->
+    <div class="camada camada--frente" data-camada="frente" data-prof="1" data-saida="1.25" data-escala="0.38">
+      <div class="camada__in nuvens" data-nuvens="frente" data-vel="0.95" data-blur="0">
+        <div class="neblina neblina--frente"></div>
+        <img src="/img/nuvem-6.webp" width="1208" height="246" alt="" data-tela="computador" data-x="0.3" data-y="0.83" data-largura="72" data-espelhada />
+        <img src="/img/nuvem-1.webp" width="1110" height="240" alt="" data-tela="computador" data-x="-0.2" data-y="0.88" data-largura="80" />
+        <img src="/img/nuvem-3.webp" width="705" height="369" alt="" data-tela="computador" data-x="0.72" data-y="0.79" data-largura="36" data-espelhada />
+        <img src="/img/nuvem-7.webp" width="279" height="210" alt="" data-tela="computador" data-x="0.06" data-y="0.74" data-largura="13" />
+        <img src="/img/nuvem-2.webp" width="350" height="211" alt="" data-tela="computador" data-x="0.5" data-y="0.97" data-largura="30" />
+        <img src="/img/nuvem-6.webp" width="1208" height="246" alt="" data-tela="celular" data-x="-0.3" data-y="0.62" data-largura="160" data-espelhada />
+        <img src="/img/nuvem-3.webp" width="705" height="369" alt="" data-tela="celular" data-x="0.56" data-y="0.6" data-largura="82" data-espelhada />
+        <img src="/img/nuvem-1.webp" width="1110" height="240" alt="" data-tela="celular" data-x="0.2" data-y="0.74" data-largura="170" />
+        <img src="/img/nuvem-4.webp" width="434" height="255" alt="" data-tela="celular" data-x="-0.2" data-y="0.86" data-largura="80" />
+        <img src="/img/nuvem-7.webp" width="279" height="210" alt="" data-tela="celular" data-x="0.7" data-y="0.94" data-largura="50" />
+      </div>
+    </div>
+
+    <!-- sombra de nuvem atrás do texto: parada e do tamanho do palco (se subisse com as nuvens, a borda viraria linha reta) -->
+    <div class="sombra-in" aria-hidden="true"><div class="sombra"></div></div>
+
+    <!-- muro: as nuvens mais perto da câmera, que sobem de baixo na saída e fecham a tela -->
+    <div class="camada camada--muro" data-camada="muro" aria-hidden="true">
+      <div class="camada__in nuvens" data-nuvens="muro" data-vel="0.5" data-blur="2.2">
+        <div class="neblina neblina--muro"></div>
+        <img src="/img/nuvem-3.webp" width="705" height="369" alt="" data-tela="computador" data-x="-0.05" data-y="0.17" data-largura="70" />
+        <img src="/img/nuvem-4.webp" width="434" height="255" alt="" data-tela="computador" data-x="0.6" data-y="0.15" data-largura="52" data-espelhada />
+        <img src="/img/nuvem-6.webp" width="1208" height="246" alt="" data-tela="computador" data-x="-0.3" data-y="0.42" data-largura="160" data-espelhada />
+        <img src="/img/nuvem-1.webp" width="1110" height="240" alt="" data-tela="computador" data-x="0.36" data-y="0.47" data-largura="140" />
+        <img src="/img/nuvem-3.webp" width="705" height="369" alt="" data-tela="computador" data-x="0.42" data-y="0.66" data-largura="80" data-espelhada />
+        <img src="/img/nuvem-6.webp" width="1208" height="246" alt="" data-tela="computador" data-x="-0.2" data-y="0.78" data-largura="170" />
+        <img src="/img/nuvem-3.webp" width="705" height="369" alt="" data-tela="celular" data-x="-0.4" data-y="0.14" data-largura="150" />
+        <img src="/img/nuvem-4.webp" width="434" height="255" alt="" data-tela="celular" data-x="0.45" data-y="0.12" data-largura="110" data-espelhada />
+        <img src="/img/nuvem-6.webp" width="1208" height="246" alt="" data-tela="celular" data-x="-1" data-y="0.38" data-largura="320" data-espelhada />
+        <img src="/img/nuvem-1.webp" width="1110" height="240" alt="" data-tela="celular" data-x="-0.3" data-y="0.44" data-largura="280" />
+        <img src="/img/nuvem-3.webp" width="705" height="369" alt="" data-tela="celular" data-x="0.1" data-y="0.62" data-largura="170" data-espelhada />
+        <img src="/img/nuvem-6.webp" width="1208" height="246" alt="" data-tela="celular" data-x="-0.6" data-y="0.76" data-largura="330" />
+      </div>
+    </div>
+    <div class="veu" aria-hidden="true"></div>
+
+    <div class="texto">
+      <h1 class="marca">
+        <span class="sr">Roger</span>
+        <!-- o nome é dividido em letras pelo JS (entram uma a uma); o asterisco-sol fica no fim -->
+        <span class="marca__linha" aria-hidden="true">Roger<span class="marca__sol"><svg viewBox="-50 -50 100 100" aria-hidden="true"><rect x="-6.5" y="-48" width="13" height="48" rx="6.5" transform="rotate(0)" /><rect x="-6.5" y="-48" width="13" height="48" rx="6.5" transform="rotate(45)" /><rect x="-6.5" y="-48" width="13" height="48" rx="6.5" transform="rotate(90)" /><rect x="-6.5" y="-48" width="13" height="48" rx="6.5" transform="rotate(135)" /><rect x="-6.5" y="-48" width="13" height="48" rx="6.5" transform="rotate(180)" /><rect x="-6.5" y="-48" width="13" height="48" rx="6.5" transform="rotate(225)" /><rect x="-6.5" y="-48" width="13" height="48" rx="6.5" transform="rotate(270)" /><rect x="-6.5" y="-48" width="13" height="48" rx="6.5" transform="rotate(315)" /></svg></span></span>
+      </h1>
+
+      <div class="chamada">
+        <!-- uma linha por <span class="linha">: as quebras são estas, em qualquer tela -->
+        <p class="chamada__texto">
+          <span class="linha"><span>Energia solar para sua casa ou empresa</span></span>
+          <span class="linha"><span>em Dom Pedrito e região. Projeto,</span></span>
+          <span class="linha"><span>instalação e homologação com confiança.</span></span>
+        </p>
+        <a class="botao chamada__botao" href="https://wa.me/5553999278474" target="_blank" rel="noopener noreferrer">Solicitar orçamento<span class="botao__seta"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5" /></svg></span></a>
+      </div>
+
+      <p class="dica">[ role para ver o sistema ]</p>
+    </div>
+
+    <!-- HUD: os números contam na entrada até o valor escrito aqui (de data-de, ou de zero) e depois seguem vivos:
+         a hora anda em tempo real, a geração de agora oscila um pouco e o total de hoje soma o que ela gera -->
+    <div class="hud hud--esq" aria-label="Geração da casa agora">
+      <p><time id="data-hora-atual">Atualizando data e hora…</time> · Dom Pedrito/RS</p>
+      <p>Exemplo · geração <span data-hud="agora">4,1</span> kW</p>
+    </div>
+    <div class="hud hud--dir">
+      <p>Exemplo · hoje: <span data-hud="hoje">9,8</span> de 27 kWh</p>
+    </div>
+  </div>
+</header>
